@@ -1,5 +1,7 @@
 # Rider 360
 
+[![CI](https://github.com/fullstack-nick/rider-360/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/fullstack-nick/rider-360/actions/workflows/ci.yml)
+
 Rider 360 is a fictional, fully synthetic end-to-end analytics product for a global
 children's cycling retailer. It connects coherent GA4-shaped journeys and operational commerce
 facts to BigQuery, dbt, Dagster, an atomic PostgreSQL serving layer, and a public Metabase review.

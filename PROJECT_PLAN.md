@@ -2,7 +2,7 @@
 
 ## Product discovery, architecture, analytics, and delivery plan
 
-**Status:** Implementation-ready; TraceGate approved as the temporary GCP incubation host while dedicated-project billing remains under review
+**Status:** Implemented and verified end to end; TraceGate is the approved temporary GCP incubation host
 **Prepared:** 2026-08-08
 **Working company:** Riderly Bikes
 **Data classification:** Entirely synthetic
@@ -1625,34 +1625,34 @@ No product, data, analytics, packaging, GCP-start, public-hosting, or GitHub dec
 
 ### Data and platform
 
-- [ ] Full and fixture generators are deterministic and documented.
-- [ ] All source grains/contracts and generator manifests are versioned.
-- [ ] BigQuery datasets are in `EU`; the active host has verified Free Trial billing; Rider labels, alerts, and cost telemetry are active.
-- [ ] Incremental and backfill runs are idempotent.
-- [ ] Critical dbt tests and Dagster checks pass or have an explicit accepted incident.
-- [ ] `ops` tables make freshness, checks, reconciliation, bytes processed, and data-through state queryable.
-- [ ] Cloud resources are reproducible from Terraform and no long-lived service-account key exists.
-- [ ] Incubator inventory proves no pre-existing TraceGate resource is managed or changed, and the dedicated-project migration runbook has been exercised or documented.
+- [x] Full and fixture generators are deterministic and documented.
+- [x] All source grains/contracts and generator manifests are versioned.
+- [x] BigQuery datasets are in `EU`; the active host has verified Free Trial billing; Rider labels, alerts, and cost telemetry are active.
+- [x] Incremental and backfill runs are idempotent.
+- [x] Critical dbt tests and Dagster checks pass or have an explicit accepted incident.
+- [x] `ops` tables make freshness, checks, reconciliation, bytes processed, and data-through state queryable.
+- [x] Cloud resources are reproducible from Terraform and no long-lived service-account key exists.
+- [x] Incubator inventory proves no pre-existing TraceGate resource is managed or changed, and the dedicated-project migration runbook has been exercised or documented.
 
 ### Analytics
 
-- [ ] Commerce and SizePath funnels use valid denominators.
-- [ ] Operational orders are canonical; GA4 is reconciled and deduplicated.
-- [ ] SizePath analysis reports naive, adjusted, truth, and limitation views.
-- [ ] Returns and CLV enforce observation maturity.
-- [ ] Product/channel opportunity estimates show assumptions and ranges.
-- [ ] Three recommendations map to owners and measurable next actions.
+- [x] Commerce and SizePath funnels use valid denominators.
+- [x] Operational orders are canonical; GA4 is reconciled and deduplicated.
+- [x] SizePath analysis reports naive, adjusted, truth, and limitation views.
+- [x] Returns and CLV enforce observation maturity.
+- [x] Product/channel opportunity estimates show assumptions and ranges.
+- [x] Three recommendations map to owners and measurable next actions.
 
 ### Communication and reproducibility
 
-- [ ] Public dashboard has five agreed tabs and a visible trust/data-through status.
-- [ ] Metric dictionary matches dbt models, Metabase, and management artifact.
-- [ ] Dashboard assets or build instructions are retained outside ephemeral container state.
-- [ ] Executive memo/deck is concise and clearly labels all findings synthetic.
-- [ ] A reviewer can run the fixture from a fresh checkout without real data.
-- [ ] Known limitations, cloud costs, credentials, expiry/cleanup, and screenshot fallback are documented.
-- [ ] Public Metabase and read-only Dagster URLs work signed out; the Dagster admin URL requires IAM and anonymous mutations fail.
-- [ ] Public repository and generated artifacts pass the brand-reference, secret, personal-detail, and asset-license review.
+- [x] Public dashboard has five agreed tabs and a visible trust/data-through status.
+- [x] Metric dictionary matches dbt models, Metabase, and management artifact.
+- [x] Dashboard assets or build instructions are retained outside ephemeral container state.
+- [x] Executive memo/deck is concise and clearly labels all findings synthetic.
+- [x] A reviewer can run the fixture from a fresh checkout without real data.
+- [x] Known limitations, cloud costs, credentials, expiry/cleanup, and screenshot fallback are documented.
+- [x] Public Metabase and read-only Dagster URLs work signed out; the Dagster admin URL requires IAM and anonymous mutations fail.
+- [x] Public repository and generated artifacts pass the brand-reference, secret, personal-detail, and asset-license review.
 
 ---
 

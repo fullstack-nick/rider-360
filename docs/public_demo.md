@@ -29,6 +29,10 @@ The release acceptance check verifies:
 The final post-backfill serving publication is Dagster run
 `aa5bb9a7-0801-4daf-8865-d7fb36d18a6c` (`SUCCESS`).
 
+The final 2026-08-09 release verifier also confirmed exact BigQuery/PostgreSQL row-count equality
+for all seven serving tables, an anonymous admin response of `403`, a public mutation result of
+`UnauthorizedError`, and authenticated operator access to the private UI with HTTP `200`.
+
 Run it without placing the admin secret on the command line:
 
 ```powershell

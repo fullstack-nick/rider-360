@@ -49,3 +49,18 @@ terraform -chdir=infra/terraform/platform state list
 Expected result: the containment verifier reports the TraceGate baseline intact and every added
 durable resource inside the Rider namespace. A separate zero-change Terraform plan proves there is
 no unmanaged Rider drift at handoff.
+
+## Final release verification
+
+Verified on 2026-08-09 after the public GitHub deployment:
+
+- immutable Rider image:
+  `sha256:7ef35c25292d2deae3cafa8a3bec61e3bc4fa8d38e751ec7a449669df01a889d`;
+- ready revisions: public `r360-dagster-public-00005-cxs`, admin
+  `r360-dagster-admin-00005-ft6`, and worker `r360-dagster-daemon-00006-5cg`;
+- the [deployment workflow](https://github.com/fullstack-nick/rider-360/actions/runs/31334812490)
+  completed successfully using keyless federation;
+- the corrected [clean-checkout CI run](https://github.com/fullstack-nick/rider-360/actions/runs/31335029140)
+  passed both jobs; and
+- the post-rollout containment check passed and Terraform reported `No changes` with zero additions,
+  updates, or destroys.
