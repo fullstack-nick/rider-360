@@ -38,6 +38,9 @@ jobs:
       - name: Sync locked environment
         run: uv sync --frozen --all-groups
 
+      - name: Prepare dbt manifest without cloud writes
+        run: uv run dbt parse --project-dir . --profiles-dir . --no-partial-parse
+
       - name: Lint and unit tests
         run: |
           uv run ruff check .
@@ -48,9 +51,6 @@ jobs:
           uv run rider360 config validate
           uv run rider360 generate --profile fixture --output data/generated/ci
           uv run rider360 verify-dataset data/generated/ci
-
-      - name: Parse dbt project without cloud writes
-        run: uv run dbt parse --project-dir . --profiles-dir . --no-partial-parse
 
       - name: Audit public-release content
         run: uv run python scripts/verify_public_release.py

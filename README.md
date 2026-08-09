@@ -112,8 +112,8 @@ Visit <http://127.0.0.1:8088>. The page writes validated fictional events only t
 
 ```powershell
 uv run ruff check .
-uv run pytest
 uv run dbt parse --project-dir . --profiles-dir .
+uv run pytest
 node scripts/validate_demo.mjs
 uv run python scripts/verify_public_release.py
 terraform -chdir=infra/terraform/bootstrap fmt -check
