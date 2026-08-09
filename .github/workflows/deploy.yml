@@ -1,0 +1,119 @@
+name: Deploy demo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Dockerfile"
+      - "pyproject.toml"
+      - "uv.lock"
+      - "dbt_project.yml"
+      - "profiles.yml"
+      - "src/**"
+      - "models/**"
+      - "macros/**"
+      - "tests/**"
+      - "config/**"
+      - "deploy/dagster/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: rider-360-demo-deploy
+  cancel-in-progress: false
+
+env:
+  PROJECT_ID: tracegate-r7m5o9ld
+  REGION: europe-west1
+  IMAGE: europe-west1-docker.pkg.dev/tracegate-r7m5o9ld/r360-containers/rider-360
+
+jobs:
+  deploy:
+    name: Build, push, and roll out
+    if: github.repository == 'fullstack-nick/rider-360' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Authenticate with keyless federation
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: tracegate-r7m5o9ld
+          workload_identity_provider: projects/555370648578/locations/global/workloadIdentityPools/r360-github/providers/r360-github-oidc
+          service_account: r360-deployer@tracegate-r7m5o9ld.iam.gserviceaccount.com
+
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v3
+        with:
+          project_id: tracegate-r7m5o9ld
+          version: ">= 550.0.0"
+
+      - name: Build and push immutable image
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+          docker build --tag "${IMAGE}:${GITHUB_SHA}" .
+          docker push "${IMAGE}:${GITHUB_SHA}"
+          digest="$(gcloud artifacts docker images describe "${IMAGE}:${GITHUB_SHA}" --format='value(image_summary.digest)')"
+          if [[ ! "${digest}" =~ ^sha256:[0-9a-f]{64}$ ]]; then
+            echo "Unexpected image digest: ${digest}" >&2
+            exit 1
+          fi
+          echo "RIDER_IMAGE=${IMAGE}@${digest}" >> "${GITHUB_ENV}"
+          echo "digest=${digest}" >> "${GITHUB_OUTPUT}"
+
+      - name: Update public Dagster service
+        shell: bash
+        run: |
+          gcloud run services update r360-dagster-public \
+            --project="${PROJECT_ID}" --region="${REGION}" --quiet \
+            --container=dagster-webserver --image="${RIDER_IMAGE}" \
+            --container=dagster-code --image="${RIDER_IMAGE}"
+
+      - name: Update private Dagster service
+        shell: bash
+        run: |
+          gcloud run services update r360-dagster-admin \
+            --project="${PROJECT_ID}" --region="${REGION}" --quiet \
+            --container=dagster-webserver --image="${RIDER_IMAGE}" \
+            --container=dagster-code --image="${RIDER_IMAGE}"
+
+      - name: Update Dagster daemon worker pool
+        shell: bash
+        run: |
+          gcloud run worker-pools update r360-dagster-daemon \
+            --project="${PROJECT_ID}" --region="${REGION}" --quiet \
+            --container=dagster-daemon --image="${RIDER_IMAGE}" \
+            --container=dagster-code --image="${RIDER_IMAGE}"
+
+      - name: Verify public and private boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' --max-time 90 https://r360-dagster-public-e225melpjq-ew.a.run.app)" = "200"
+          test "$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' --max-time 90 https://r360-dagster-admin-e225melpjq-ew.a.run.app)" = "403"
+          mutation_result="$(curl --silent --show-error --max-time 90 \
+            -H 'content-type: application/json' \
+            --data '{"query":"mutation { reloadWorkspace { __typename } }"}' \
+            https://r360-dagster-public-e225melpjq-ew.a.run.app/graphql)"
+          echo "${mutation_result}" | grep -q 'UnauthorizedError'
+
+      - name: Write deployment summary
+        shell: bash
+        run: |
+          {
+            echo '## Rider 360 demo deployed'
+            echo
+            echo "- Image: \`${RIDER_IMAGE}\`"
+            echo '- Public Dagster: https://r360-dagster-public-e225melpjq-ew.a.run.app'
+            echo '- Private Dagster remains IAM protected.'
+          } >> "${GITHUB_STEP_SUMMARY}"

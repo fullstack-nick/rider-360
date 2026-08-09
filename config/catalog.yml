@@ -1,0 +1,37 @@
+version: 1
+products:
+  - {sku: R360-B12-PEBBLE, name: Pebble 12, category: bike, family: balance, wheel_size: 12, age_band: "2-4", height_band: "85-100", base_price_eur: 24900, unit_cogs_eur: 10800}
+  - {sku: R360-B14-SPRING, name: Springtail 14, category: bike, family: first-pedal, wheel_size: 14, age_band: "3-5", height_band: "95-110", base_price_eur: 32900, unit_cogs_eur: 14200}
+  - {sku: R360-B16-COMET, name: Comet 16, category: bike, family: first-pedal, wheel_size: 16, age_band: "4-6", height_band: "105-120", base_price_eur: 38900, unit_cogs_eur: 16800}
+  - {sku: R360-B16-NOVA, name: Nova 16, category: bike, family: first-pedal, wheel_size: 16, age_band: "4-6", height_band: "105-120", base_price_eur: 41900, unit_cogs_eur: 18100}
+  - {sku: R360-B20-DRIFT, name: Drift 20, category: bike, family: explore, wheel_size: 20, age_band: "6-8", height_band: "115-130", base_price_eur: 48900, unit_cogs_eur: 21100}
+  - {sku: R360-B20-ORBIT, name: Orbit 20, category: bike, family: explore, wheel_size: 20, age_band: "6-8", height_band: "115-130", base_price_eur: 52900, unit_cogs_eur: 22900}
+  - {sku: R360-B24-RIDGE, name: Ridge 24, category: bike, family: trail, wheel_size: 24, age_band: "8-11", height_band: "125-145", base_price_eur: 61900, unit_cogs_eur: 26900}
+  - {sku: R360-B24-AURORA, name: Aurora 24, category: bike, family: city, wheel_size: 24, age_band: "8-11", height_band: "125-145", base_price_eur: 64900, unit_cogs_eur: 28100}
+  - {sku: R360-B26-HORIZON, name: Horizon 26, category: bike, family: trail, wheel_size: 26, age_band: "10-14", height_band: "140-165", base_price_eur: 72900, unit_cogs_eur: 31800}
+  - {sku: R360-B26-EMBER, name: Ember 26, category: bike, family: city, wheel_size: 26, age_band: "10-14", height_band: "140-165", base_price_eur: 75900, unit_cogs_eur: 33100}
+  - {sku: R360-A-HELMET-S, name: Halo Helmet S, category: accessory, family: safety, wheel_size: null, age_band: "2-6", height_band: null, base_price_eur: 4900, unit_cogs_eur: 1700}
+  - {sku: R360-A-HELMET-M, name: Halo Helmet M, category: accessory, family: safety, wheel_size: null, age_band: "6-11", height_band: null, base_price_eur: 5500, unit_cogs_eur: 1900}
+  - {sku: R360-A-HELMET-L, name: Halo Helmet L, category: accessory, family: safety, wheel_size: null, age_band: "10-14", height_band: null, base_price_eur: 5900, unit_cogs_eur: 2050}
+  - {sku: R360-A-LIGHT, name: Firefly Light Set, category: accessory, family: visibility, wheel_size: null, age_band: null, height_band: null, base_price_eur: 3200, unit_cogs_eur: 1050}
+  - {sku: R360-A-BELL, name: Clearbell, category: accessory, family: visibility, wheel_size: null, age_band: null, height_band: null, base_price_eur: 1600, unit_cogs_eur: 480}
+  - {sku: R360-A-BASKET, name: Meadow Basket, category: accessory, family: carry, wheel_size: null, age_band: null, height_band: null, base_price_eur: 3900, unit_cogs_eur: 1400}
+  - {sku: R360-A-BOTTLE, name: Trail Sip Bottle, category: accessory, family: hydration, wheel_size: null, age_band: null, height_band: null, base_price_eur: 1800, unit_cogs_eur: 520}
+  - {sku: R360-A-HOLDER, name: Trail Sip Holder, category: accessory, family: hydration, wheel_size: null, age_band: null, height_band: null, base_price_eur: 2200, unit_cogs_eur: 710}
+  - {sku: R360-A-MUDGUARD-16, name: Cloudguard 16, category: accessory, family: protection, wheel_size: 16, age_band: null, height_band: null, base_price_eur: 2700, unit_cogs_eur: 920}
+  - {sku: R360-A-MUDGUARD-20, name: Cloudguard 20, category: accessory, family: protection, wheel_size: 20, age_band: null, height_band: null, base_price_eur: 2900, unit_cogs_eur: 990}
+  - {sku: R360-A-MUDGUARD-24, name: Cloudguard 24, category: accessory, family: protection, wheel_size: 24, age_band: null, height_band: null, base_price_eur: 3100, unit_cogs_eur: 1060}
+  - {sku: R360-A-STAND-20, name: Steady Stand 20, category: accessory, family: utility, wheel_size: 20, age_band: null, height_band: null, base_price_eur: 2400, unit_cogs_eur: 820}
+  - {sku: R360-A-STAND-24, name: Steady Stand 24, category: accessory, family: utility, wheel_size: 24, age_band: null, height_band: null, base_price_eur: 2600, unit_cogs_eur: 890}
+  - {sku: R360-A-STAND-26, name: Steady Stand 26, category: accessory, family: utility, wheel_size: 26, age_band: null, height_band: null, base_price_eur: 2800, unit_cogs_eur: 960}
+  - {sku: R360-A-LOCK, name: Looplock Mini, category: accessory, family: security, wheel_size: null, age_band: null, height_band: null, base_price_eur: 3500, unit_cogs_eur: 1220}
+  - {sku: R360-A-GLOVES-S, name: Cloudgrip Gloves S, category: accessory, family: apparel, wheel_size: null, age_band: "4-7", height_band: null, base_price_eur: 2300, unit_cogs_eur: 760}
+  - {sku: R360-A-GLOVES-M, name: Cloudgrip Gloves M, category: accessory, family: apparel, wheel_size: null, age_band: "7-11", height_band: null, base_price_eur: 2500, unit_cogs_eur: 830}
+  - {sku: R360-A-BAG, name: Daytrail Frame Bag, category: accessory, family: carry, wheel_size: null, age_band: null, height_band: null, base_price_eur: 4200, unit_cogs_eur: 1510}
+compatibility:
+  - {parent_family: balance, accessory_skus: [R360-A-HELMET-S, R360-A-BELL]}
+  - {parent_wheel_size: 14, accessory_skus: [R360-A-HELMET-S, R360-A-BELL, R360-A-BASKET]}
+  - {parent_wheel_size: 16, accessory_skus: [R360-A-HELMET-S, R360-A-BELL, R360-A-MUDGUARD-16, R360-A-BASKET]}
+  - {parent_wheel_size: 20, accessory_skus: [R360-A-HELMET-M, R360-A-LIGHT, R360-A-MUDGUARD-20, R360-A-STAND-20, R360-A-BOTTLE, R360-A-HOLDER]}
+  - {parent_wheel_size: 24, accessory_skus: [R360-A-HELMET-M, R360-A-LIGHT, R360-A-MUDGUARD-24, R360-A-STAND-24, R360-A-LOCK, R360-A-BAG]}
+  - {parent_wheel_size: 26, accessory_skus: [R360-A-HELMET-L, R360-A-LIGHT, R360-A-STAND-26, R360-A-LOCK, R360-A-BAG]}

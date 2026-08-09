@@ -1,0 +1,23 @@
+version: 1
+channels:
+  - name: Direct
+    source_patterns: ["(direct)"]
+    medium_patterns: ["(none)"]
+  - name: Organic Search
+    source_patterns: [google, bing, duckduckgo]
+    medium_patterns: [organic]
+  - name: Paid Search
+    source_patterns: [google, bing]
+    medium_patterns: [cpc, ppc]
+  - name: Paid Social
+    source_patterns: [social_spark, picstream]
+    medium_patterns: [paid_social]
+  - name: Affiliate
+    source_patterns: [coupontrail, ridepartners]
+    medium_patterns: [affiliate]
+  - name: Email
+    source_patterns: [newsletter, lifecycle]
+    medium_patterns: [email]
+  - name: Referral
+    source_patterns: [partner, community]
+    medium_patterns: [referral]

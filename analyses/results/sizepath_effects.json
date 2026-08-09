@@ -1,0 +1,51 @@
+{
+  "analysis_grain": "eligible product-view session",
+  "sessions": 450000,
+  "users": 355295,
+  "treatment_share": 0.33964222222222223,
+  "outcome_share": 0.059033333333333333,
+  "propensity": {
+    "minimum": 0.312149820255894,
+    "p01": 0.3232266887872342,
+    "median": 0.33987329574677616,
+    "p99": 0.3557832501261377,
+    "maximum": 0.3670842065796764
+  },
+  "effects": [
+    {
+      "method": "Naive observed",
+      "risk_difference": 0.015945997454747708,
+      "standard_error": 0.000770785837885787,
+      "confidence_low": 0.014435257212491566,
+      "confidence_high": 0.01745673769700385,
+      "treated_conversion": 0.06956339677700063,
+      "control_conversion": 0.05361739932225292
+    },
+    {
+      "method": "Stabilized IPW",
+      "risk_difference": 0.015943736469333704,
+      "standard_error": 0.0007708740168007512,
+      "confidence_low": 0.014432823396404231,
+      "confidence_high": 0.017454649542263174,
+      "treated_conversion": 0.06955735122436989,
+      "control_conversion": 0.05361361475503618
+    },
+    {
+      "method": "Cross-fitted doubly robust",
+      "risk_difference": 0.015933751000214616,
+      "standard_error": 0.0007711143405039698,
+      "confidence_low": 0.014422366892826836,
+      "confidence_high": 0.017445135107602396,
+      "treated_conversion": null,
+      "control_conversion": null
+    }
+  ],
+  "synthetic_truth": {
+    "conversion_log_odds_effect": 0.24,
+    "conversion_odds_ratio": 1.2712491503214047,
+    "average_purchase_risk_difference": 0.012004534721056451
+  },
+  "maximum_absolute_smd_before": 0.00811991521388285,
+  "maximum_absolute_smd_after": 0.001105354061153535,
+  "interpretation": "The estimand is an observational association among eligible product-view sessions. Any gap from the synthetic truth is residual bias, including unobserved latent intent."
+}

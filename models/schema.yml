@@ -1,0 +1,98 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: Deduplicated, typed event stream with governed parameter extraction.
+    columns:
+      - name: event_id
+        tests: [not_null, unique]
+      - name: session_key
+        tests: [not_null]
+  - name: stg_orders
+    description: Latest non-test operational order record.
+    columns:
+      - name: order_id
+        tests: [not_null, unique]
+      - name: session_key
+        tests: [not_null]
+  - name: stg_order_items
+    columns:
+      - name: order_item_id
+        tests: [not_null, unique]
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+  - name: int_sessions
+    description: One attribution-safe record per web session.
+    columns:
+      - name: session_key
+        tests: [not_null, unique]
+      - name: channel
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Organic Search', 'Paid Search', 'Paid Social', 'Email', 'Affiliate', 'Direct', 'Other']
+  - name: int_purchase_events
+    columns:
+      - name: transaction_id
+        tests: [not_null, unique]
+  - name: int_orders_enriched
+    columns:
+      - name: order_id
+        tests: [not_null, unique]
+      - name: fx_to_eur
+        tests: [not_null]
+  - name: mart_executive_daily
+    description: Dashboard-ready commercial scorecard by day, market and governed channel.
+    columns:
+      - name: metric_date
+        tests: [not_null]
+      - name: site_market
+        tests: [not_null]
+      - name: sessions
+        tests: [not_null]
+  - name: mart_funnel_daily
+    description: Funnel stage progression by market, device and channel.
+  - name: mart_sizepath_daily
+    description: Observational SizePath conversion and mature size-return outcomes.
+  - name: mart_inventory_daily
+    description: Product-market availability and stockout exposure.
+  - name: mart_accessory_attach_daily
+    description: Compatibility-aware accessory attachment outcomes.
+  - name: mart_customer_ltv
+    description: Cohort contribution LTV by acquisition market and channel.
+  - name: mart_data_quality_daily
+    description: Public-safe measurement coverage and freshness indicators.
+  - name: audit_reconciliation
+    description: Point-in-time comparison of canonical purchase transactions and operational orders.
+  - name: audit_source_freshness
+    description: Latest delivered partition, arrival latency, and status for every partitioned source.
+    columns:
+      - name: source_name
+        tests: [not_null, unique]
+      - name: data_through
+        tests: [not_null]
+      - name: arrival_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['pass', 'warning']
+  - name: audit_check_results
+    description: Queryable critical and warning check outcomes for the current warehouse snapshot.
+    columns:
+      - name: check_name
+        tests: [not_null, unique]
+      - name: status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['pass', 'warning', 'fail']
+  - name: audit_job_costs
+    description: Thirty-day Rider-only BigQuery job usage visible to the executing identity.
+    columns:
+      - name: job_id
+        tests: [not_null, unique]

@@ -1,0 +1,5 @@
+version: 1
+excluded_referral_hosts:
+  - pay-gateway.example
+  - wallet-return.example
+  - secure-checkout.example

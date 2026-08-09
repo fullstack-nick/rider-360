@@ -1,0 +1,39 @@
+name: rider_360
+version: "1.0.0"
+config-version: 2
+
+profile: rider_360
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  return_maturity_days: 60
+
+models:
+  rider_360:
+    +persist_docs:
+      relation: true
+      columns: true
+    staging:
+      +schema: r360_staging
+      +materialized: view
+      +tags: [staging]
+    intermediate:
+      +schema: r360_intermediate
+      +materialized: table
+      +tags: [intermediate]
+    marts:
+      +schema: r360_marts
+      +materialized: table
+      +tags: [mart, publish_to_bi]
+    audit:
+      +schema: r360_audit
+      +materialized: table
+      +tags: [audit]
+
+query-comment:
+  comment: "Rider 360 dbt: {{ node.unique_id }}"
+  append: true

@@ -1,0 +1,271 @@
+{
+  "project_id": "tracegate-r7m5o9ld",
+  "french_mobile_payment": {
+    "pre_rate": 0.78,
+    "post_rate": 0.5304347826086957,
+    "control_pre_rate": 0.8140703517587939,
+    "control_post_rate": 0.7597535934291582,
+    "difference_in_differences": -0.19524845906166854
+  },
+  "marketing": {
+    "contribution_after_marketing_eur": -27846817.564708184,
+    "worst_channel": "Paid Search",
+    "worst_channel_contribution_after_marketing_eur": -13636289.289821798
+  },
+  "accessory_attach": {
+    "affected_products": 2,
+    "incremental_attach_orders_at_peer_rate": 697.9469176257113,
+    "illustrative_incremental_contribution_eur": 15354.832187765649,
+    "contribution_assumption_eur_per_order": 22.0
+  },
+  "sizepath_return_guardrail": {
+    "started_rate": 0.05071225071225071,
+    "not_started_rate": 0.10896658211095181,
+    "descriptive_difference": -0.0582543313987011
+  },
+  "inventory_incident": {
+    "pre_average_stockout_fraction": 0.0,
+    "incident_average_stockout_fraction": 0.5238591269841268,
+    "note": "Inventory availability is operational evidence only; generator v1.0 does not causally suppress order generation when stock is unavailable."
+  },
+  "tables": {
+    "funnel_investigation": [
+      {
+        "segment": "DE/NL mobile control",
+        "period": "post",
+        "payment_sessions": 487,
+        "purchase_sessions": 370,
+        "payment_to_purchase_rate": 0.7597535934291582
+      },
+      {
+        "segment": "DE/NL mobile control",
+        "period": "pre",
+        "payment_sessions": 398,
+        "purchase_sessions": 324,
+        "payment_to_purchase_rate": 0.8140703517587939
+      },
+      {
+        "segment": "FR desktop",
+        "period": "post",
+        "payment_sessions": 104,
+        "purchase_sessions": 80,
+        "payment_to_purchase_rate": 0.7692307692307693
+      },
+      {
+        "segment": "FR desktop",
+        "period": "pre",
+        "payment_sessions": 95,
+        "purchase_sessions": 75,
+        "payment_to_purchase_rate": 0.7894736842105263
+      },
+      {
+        "segment": "FR mobile",
+        "period": "post",
+        "payment_sessions": 230,
+        "purchase_sessions": 122,
+        "payment_to_purchase_rate": 0.5304347826086957
+      },
+      {
+        "segment": "FR mobile",
+        "period": "pre",
+        "payment_sessions": 200,
+        "purchase_sessions": 156,
+        "payment_to_purchase_rate": 0.78
+      }
+    ],
+    "product_opportunity": [
+      {
+        "parent_sku": "R360-B24-RIDGE",
+        "parent_product": "Ridge 24",
+        "bike_orders": 2175,
+        "attached_orders": 177,
+        "attach_rate": 0.08137931034482758,
+        "peer_attach_rate": 0.2565176908752328,
+        "attach_rate_gap": 0.1751383805304052,
+        "incremental_attach_orders": 380.9259776536313
+      },
+      {
+        "parent_sku": "R360-B20-DRIFT",
+        "parent_product": "Drift 20",
+        "bike_orders": 2102,
+        "attached_orders": 174,
+        "attach_rate": 0.08277830637488107,
+        "peer_attach_rate": 0.2335970218706375,
+        "attach_rate_gap": 0.15081871549575643,
+        "incremental_attach_orders": 317.02093997208
+      }
+    ],
+    "acquisition_quality": [
+      {
+        "channel": "Paid Search",
+        "sessions": 90445,
+        "orders": 5419,
+        "purchasing_customers": 5419,
+        "revenue_eur": 2871456.878542201,
+        "contribution_margin_eur": 2406225.050606661,
+        "marketing_spend_eur": 16042514.340428459,
+        "contribution_after_marketing_eur": -13636289.289821798,
+        "conversion_rate": 0.059914865387804744,
+        "cac_eur": 2960.4196974402025,
+        "contribution_roas": 0.14999051891403178
+      },
+      {
+        "channel": "Paid Social",
+        "sessions": 71946,
+        "orders": 4246,
+        "purchasing_customers": 4246,
+        "revenue_eur": 2242355.854908766,
+        "contribution_margin_eur": 1919168.963427695,
+        "marketing_spend_eur": 12084532.047392376,
+        "contribution_after_marketing_eur": -10165363.083964681,
+        "conversion_rate": 0.05901648458566147,
+        "cac_eur": 2846.097985725948,
+        "contribution_roas": 0.15881202150825666
+      },
+      {
+        "channel": "Affiliate",
+        "sessions": 40139,
+        "orders": 2289,
+        "purchasing_customers": 2289,
+        "revenue_eur": 1128962.9817789532,
+        "contribution_margin_eur": 954631.6301711941,
+        "marketing_spend_eur": 5010699.206461042,
+        "contribution_after_marketing_eur": -4056067.576289848,
+        "conversion_rate": 0.057026831759635264,
+        "cac_eur": 2189.0341662127753,
+        "contribution_roas": 0.19051864636780533
+      },
+      {
+        "channel": "Email",
+        "sessions": 45151,
+        "orders": 2672,
+        "purchasing_customers": 2672,
+        "revenue_eur": 1424045.3336578035,
+        "contribution_margin_eur": 1205352.2920120377,
+        "marketing_spend_eur": 2145031.748395729,
+        "contribution_after_marketing_eur": -939679.4563836912,
+        "conversion_rate": 0.0591791986888441,
+        "cac_eur": 802.7813429624733,
+        "contribution_roas": 0.5619274833174482
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 135167,
+        "orders": 7993,
+        "purchasing_customers": 7993,
+        "revenue_eur": 4219557.009814752,
+        "contribution_margin_eur": 3532366.4395749983,
+        "marketing_spend_eur": 4349817.826609843,
+        "contribution_after_marketing_eur": -817451.3870348451,
+        "conversion_rate": 0.05913425614240162,
+        "cac_eur": 544.2034063067488,
+        "contribution_roas": 0.8120722706973801
+      },
+      {
+        "channel": "Direct",
+        "sessions": 67152,
+        "orders": 3946,
+        "purchasing_customers": 3946,
+        "revenue_eur": 2094628.830851988,
+        "contribution_margin_eur": 1768033.228786676,
+        "marketing_spend_eur": 0.0,
+        "contribution_after_marketing_eur": 1768033.228786676,
+        "conversion_rate": 0.05876221110316893,
+        "cac_eur": 0.0,
+        "contribution_roas": null
+      }
+    ],
+    "cohort_clv": [
+      {
+        "acquisition_channel": "Email",
+        "customers": 1769,
+        "contribution_margin_365d_eur": 805674.0544311865,
+        "contribution_365d_per_customer_eur": 455.4403925557866,
+        "orders_per_customer": 1.0214810627473148
+      },
+      {
+        "acquisition_channel": "Paid Social",
+        "customers": 2827,
+        "contribution_margin_365d_eur": 1283338.4038447903,
+        "contribution_365d_per_customer_eur": 453.95769502822435,
+        "orders_per_customer": 1.0155642023346303
+      },
+      {
+        "acquisition_channel": "Direct",
+        "customers": 2599,
+        "contribution_margin_365d_eur": 1174170.966295094,
+        "contribution_365d_per_customer_eur": 451.7779785667926,
+        "orders_per_customer": 1.0188534051558291
+      },
+      {
+        "acquisition_channel": "Paid Search",
+        "customers": 3682,
+        "contribution_margin_365d_eur": 1650171.5826273821,
+        "contribution_365d_per_customer_eur": 448.1726188558887,
+        "orders_per_customer": 1.0198261814231395
+      },
+      {
+        "acquisition_channel": "Organic Search",
+        "customers": 5281,
+        "contribution_margin_365d_eur": 2348323.3520038817,
+        "contribution_365d_per_customer_eur": 444.67399204769583,
+        "orders_per_customer": 1.0170422268509751
+      },
+      {
+        "acquisition_channel": "Affiliate",
+        "customers": 1563,
+        "contribution_margin_365d_eur": 658715.1656722768,
+        "contribution_365d_per_customer_eur": 421.4428443200747,
+        "orders_per_customer": 1.0191938579654511
+      }
+    ],
+    "sizepath_return_guardrail": [
+      {
+        "used_size_path": false,
+        "mature_order_sessions": 9067,
+        "size_return_sessions": 988,
+        "mature_size_return_rate": 0.10896658211095181
+      },
+      {
+        "used_size_path": true,
+        "mature_order_sessions": 7020,
+        "size_return_sessions": 356,
+        "mature_size_return_rate": 0.05071225071225071
+      }
+    ],
+    "inventory_incident": [
+      {
+        "site_market": "AT",
+        "period": "incident",
+        "product_days": 28,
+        "units_sold": 14,
+        "average_stockout_day_fraction": 0.527455357142857,
+        "out_of_stock_days": 9
+      },
+      {
+        "site_market": "AT",
+        "period": "pre",
+        "product_days": 28,
+        "units_sold": 12,
+        "average_stockout_day_fraction": 0.0,
+        "out_of_stock_days": 0
+      },
+      {
+        "site_market": "DE",
+        "period": "incident",
+        "product_days": 28,
+        "units_sold": 38,
+        "average_stockout_day_fraction": 0.5202628968253968,
+        "out_of_stock_days": 17
+      },
+      {
+        "site_market": "DE",
+        "period": "pre",
+        "product_days": 28,
+        "units_sold": 30,
+        "average_stockout_day_fraction": 0.0,
+        "out_of_stock_days": 0
+      }
+    ]
+  }
+}

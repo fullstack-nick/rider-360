@@ -1,0 +1,92 @@
+version: 1
+scenarios:
+  - id: B1
+    name: French mobile payment regression
+    enabled: true
+    start_date: 2025-03-10
+    affected_dimensions:
+      market: [FR]
+      device_category: [mobile]
+    mechanism:
+      payment_success_multiplier: 0.70
+    expected_direction:
+      payment_to_purchase_rate: down
+    validation_tolerance: 0.08
+  - id: B2
+    name: Popular 16-inch bike stockout
+    enabled: true
+    start_date: 2025-05-12
+    end_date: 2025-06-08
+    affected_dimensions:
+      market: [AT, DE]
+      sku: [R360-B16-COMET]
+    mechanism:
+      available_to_sell_multiplier: 0.05
+    expected_direction:
+      stockout_exposure: up
+    validation_tolerance: 0.10
+  - id: B3
+    name: SizePath real but confounded value
+    enabled: true
+    start_date: 2023-01-01
+    affected_dimensions:
+      market: [AT, DE, FR, NL, GB, US]
+    mechanism:
+      conversion_log_odds_effect: 0.24
+      size_return_log_odds_effect: -0.42
+      intent_selection_strength: 1.15
+    expected_direction:
+      adjusted_effect: positive_but_below_naive
+    validation_tolerance: 0.05
+  - id: B4
+    name: Weak accessory merchandising
+    enabled: true
+    start_date: 2024-01-01
+    affected_dimensions:
+      sku: [R360-B20-DRIFT, R360-B24-RIDGE]
+    mechanism:
+      bundle_exposure_multiplier: 0.35
+    expected_direction:
+      compatible_attach_rate: down
+    validation_tolerance: 0.08
+  - id: B5
+    name: Misleading last-click performance
+    enabled: true
+    start_date: 2023-01-01
+    affected_dimensions:
+      channel: [Paid Social, Affiliate]
+    mechanism:
+      paid_social_repeat_multiplier: 1.30
+      affiliate_discount_multiplier: 1.40
+    expected_direction:
+      channel_rank_changes_at_365_days: true
+    validation_tolerance: 0.10
+  - id: Q1
+    name: Duplicate purchase measurement
+    enabled: true
+    start_date: 2023-01-01
+    mechanism:
+      duplicate_purchase_rate: 0.035
+  - id: Q3
+    name: Missing FX dates
+    enabled: true
+    start_date: 2024-09-16
+    end_date: 2024-09-18
+    affected_dimensions:
+      currency: [GBP, USD]
+  - id: Q4
+    name: Payment referral pollution
+    enabled: true
+    start_date: 2023-01-01
+    mechanism:
+      polluted_purchase_rate: 0.12
+  - id: Q6
+    name: SizePath parameter coverage regression
+    enabled: true
+    start_date: 2025-07-14
+    affected_dimensions:
+      market: [FR]
+      device_category: [mobile]
+      size_path_version: [2.1]
+    mechanism:
+      recommended_product_id_missing_rate: 0.45

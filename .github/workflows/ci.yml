@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Python, contracts, and dbt
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: "3.11"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.2"
+          enable-cache: true
+
+      - name: Sync locked environment
+        run: uv sync --frozen --all-groups
+
+      - name: Lint and unit tests
+        run: |
+          uv run ruff check .
+          uv run pytest
+
+      - name: Validate configuration and deterministic fixture
+        run: |
+          uv run rider360 config validate
+          uv run rider360 generate --profile fixture --output data/generated/ci
+          uv run rider360 verify-dataset data/generated/ci
+
+      - name: Parse dbt project without cloud writes
+        run: uv run dbt parse --project-dir . --profiles-dir . --no-partial-parse
+
+      - name: Audit public-release content
+        run: uv run python scripts/verify_public_release.py
+
+  platform:
+    name: Terraform, dataLayer, and container
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Validate dataLayer contract
+        run: node scripts/validate_demo.mjs
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15.8"
+          terraform_wrapper: false
+
+      - name: Validate Terraform foundation
+        run: |
+          terraform -chdir=infra/terraform/bootstrap fmt -check
+          terraform -chdir=infra/terraform/bootstrap init -backend=false
+          terraform -chdir=infra/terraform/bootstrap validate
+
+      - name: Validate Terraform platform
+        run: |
+          terraform -chdir=infra/terraform/platform fmt -check
+          terraform -chdir=infra/terraform/platform init -backend=false
+          terraform -chdir=infra/terraform/platform validate
+
+      - name: Build application image
+        run: docker build --tag rider-360:ci .

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Rider 360 synthetic dataLayer instrumentation demonstration."
+    />
+    <title>Rider 360 · dataLayer Lab</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Rider 360 dataLayer Lab home">
+        <span class="brand-mark">R360</span>
+        <span>dataLayer Lab</span>
+      </a>
+      <div class="status-pill" id="contract-status" data-state="ready">Ready</div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Synthetic instrumentation prototype</p>
+          <h1>A journey you can inspect<br />event by event.</h1>
+          <p class="lede">
+            Run a fictional SizePath recommendation flow and watch validated GA4-style
+            ecommerce payloads enter <code>window.dataLayer</code>. Nothing is transmitted.
+          </p>
+        </div>
+        <aside class="privacy-card" aria-label="Privacy contract">
+          <span>PRIVACY CONTRACT</span>
+          <strong>Coarse bands in.<br />Personal details out.</strong>
+          <p>No names, birth dates, precise location, free text, or real identifiers.</p>
+          <button type="button" class="text-button" id="pii-check">Test the PII guard →</button>
+        </aside>
+      </section>
+
+      <section class="workspace" aria-label="Interactive event demonstration">
+        <div class="journey-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Guided journey</p>
+              <h2>Comet 16 recommendation</h2>
+            </div>
+            <span class="fictional-badge">Fictional product</span>
+          </div>
+
+          <div class="product-visual" aria-hidden="true">
+            <div class="orbit orbit-a"></div>
+            <div class="orbit orbit-b"></div>
+            <div class="bike-glyph">16</div>
+            <span>COMET</span>
+          </div>
+
+          <div class="flow-control">
+            <div class="progress-track"><div id="progress-bar"></div></div>
+            <p id="flow-hint">Ready to start.</p>
+            <button type="button" class="primary-button" id="flow-action">Start SizePath</button>
+          </div>
+        </div>
+
+        <div class="log-panel">
+          <div class="panel-heading log-heading">
+            <div>
+              <p class="eyebrow">Live payload stream</p>
+              <h2>window.dataLayer</h2>
+            </div>
+            <div class="event-counter"><span id="event-count">0</span> events</div>
+          </div>
+          <div id="event-log" class="event-log" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="contract-strip">
+        <div><span>01</span><strong>Feature exposure</strong><p>Impression and start remain separate.</p></div>
+        <div><span>02</span><strong>Bounded answers</strong><p>Question IDs and coarse answer bands only.</p></div>
+        <div><span>03</span><strong>Operational truth</strong><p>Purchase IDs reconcile downstream.</p></div>
+        <div><span>04</span><strong>No endpoint</strong><p>The demo never sends a network beacon.</p></div>
+      </section>
+    </main>
+
+    <footer>
+      Rider 360 · all products, people, events, and outcomes are fictional and synthetic.
+    </footer>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

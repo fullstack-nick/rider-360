@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Immutable synthetic source extracts loaded by the Rider 360 ingestion asset.
+    database: "{{ env_var('GCP_PROJECT_ID', target.project) }}"
+    schema: "{{ env_var('R360_RAW_DATASET', 'r360_raw') }}"
+    tables:
+      - name: events
+      - name: orders
+      - name: order_items
+      - name: returns
+      - name: products
+      - name: product_market_prices
+      - name: product_accessory_compatibility
+      - name: inventory_daily
+      - name: marketing_spend
+      - name: exchange_rates
+      - name: customers
+      - name: source_delivery_log

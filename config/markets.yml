@@ -1,0 +1,38 @@
+version: 1
+markets:
+  - code: AT
+    name: Austria
+    currency: EUR
+    timezone: Europe/Vienna
+    locale: de-AT
+    traffic_weight: 0.12
+  - code: DE
+    name: Germany
+    currency: EUR
+    timezone: Europe/Berlin
+    locale: de-DE
+    traffic_weight: 0.30
+  - code: FR
+    name: France
+    currency: EUR
+    timezone: Europe/Paris
+    locale: fr-FR
+    traffic_weight: 0.18
+  - code: NL
+    name: Netherlands
+    currency: EUR
+    timezone: Europe/Amsterdam
+    locale: nl-NL
+    traffic_weight: 0.10
+  - code: GB
+    name: United Kingdom
+    currency: GBP
+    timezone: Europe/London
+    locale: en-GB
+    traffic_weight: 0.15
+  - code: US
+    name: United States
+    currency: USD
+    timezone: America/New_York
+    locale: en-US
+    traffic_weight: 0.15

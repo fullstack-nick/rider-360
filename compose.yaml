@@ -1,0 +1,133 @@
+name: rider-360
+
+x-rider360-app: &rider360-app
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: rider-360:local
+  restart: unless-stopped
+  depends_on:
+    r360-postgres:
+      condition: service_healthy
+  environment: &rider360-environment
+    DAGSTER_HOME: /opt/dagster/dagster_home
+    DAGSTER_POSTGRES_URL: postgresql://r360_dagster:r360_dagster_local@r360-postgres:5432/r360_dagster
+    GCP_PROJECT_ID: ${GCP_PROJECT_ID:-tracegate-r7m5o9ld}
+    DBT_PROFILES_DIR: /app
+    R360_GENERATION_PROFILE: ${R360_GENERATION_PROFILE:-fixture}
+    R360_DATASET_DIR: /tmp/rider360/data
+    R360_BI_PG_DSN: postgresql://r360_publisher:r360_publisher_local@r360-postgres:5432/r360_bi
+    R360_BI_READER_ROLE: r360_metabase
+
+services:
+  r360-postgres:
+    image: postgres:16.10-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: r360_admin
+      POSTGRES_PASSWORD: r360_admin_local
+      POSTGRES_DB: postgres
+    ports:
+      - "54320:5432"
+    volumes:
+      - r360-postgres-data:/var/lib/postgresql/data
+      - ./deploy/postgres/init.sql:/docker-entrypoint-initdb.d/001-rider360.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U r360_admin -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  r360-metabase:
+    image: metabase/metabase:v0.61.2
+    restart: unless-stopped
+    depends_on:
+      r360-postgres:
+        condition: service_healthy
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: r360-postgres
+      MB_DB_PORT: 5432
+      MB_DB_DBNAME: r360_metabase
+      MB_DB_USER: r360_metabase
+      MB_DB_PASS: r360_metabase_local
+      MB_JETTY_PORT: 3000
+      MB_SITE_NAME: Rider 360
+      MB_SITE_LOCALE: en
+      MB_ANON_TRACKING_ENABLED: "false"
+      JAVA_TIMEZONE: Europe/Vienna
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent http://localhost:3000/api/health | grep ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 45s
+
+  r360-dagster-admin:
+    <<: *rider360-app
+    command:
+      [
+        "dagster-webserver",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3000",
+        "--module-name",
+        "rider360.orchestration.definitions",
+      ]
+    ports:
+      - "3001:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:3000/server_info', timeout=2)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  r360-dagster-public:
+    <<: *rider360-app
+    command:
+      [
+        "dagster-webserver",
+        "--read-only",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "3000",
+        "--module-name",
+        "rider360.orchestration.definitions",
+      ]
+    ports:
+      - "3002:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:3000/server_info', timeout=2)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  r360-dagster-daemon:
+    <<: *rider360-app
+    command:
+      [
+        "dagster-daemon",
+        "run",
+        "--module-name",
+        "rider360.orchestration.definitions",
+      ]
+
+volumes:
+  r360-postgres-data:
+    name: r360-postgres-data

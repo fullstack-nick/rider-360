@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+.playwright-cli/
+.user.yml
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.local/
+*service-account*.json
+credentials*.json
+gha-creds-*.json
+
+# Generated data and analysis output
+data/generated/
+data/full/
+artifacts/
+analyses/output/
+output/
+*.pptx.inspect.ndjson
+docs/executive/Rider_360_Executive_Decision_Deck/
+
+# dbt
+target/
+logs/
+dbt_packages/
+
+# Docker and application state
+.docker-data/
+metabase-data/
+postgres-data/
+dagster_home/history/
+dagster_home/storage/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

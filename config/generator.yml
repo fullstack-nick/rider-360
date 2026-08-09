@@ -1,0 +1,19 @@
+version: 1
+master_seed: 3602026
+generator_version: "1.0.0"
+property_timezone: Europe/Vienna
+reporting_currency: EUR
+return_maturity_days: 60
+profiles:
+  fixture:
+    start_date: 2025-01-01
+    end_date: 2025-01-30
+    markets: [DE]
+    target_sessions: 10000
+    output_subdir: fixture
+  full:
+    start_date: 2023-01-01
+    end_date: 2025-12-31
+    markets: [AT, DE, FR, NL, GB, US]
+    target_sessions: 450000
+    output_subdir: full

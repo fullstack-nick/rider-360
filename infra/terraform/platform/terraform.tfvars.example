@@ -1,0 +1,11 @@
+project_id        = "tracegate-r7m5o9ld"
+region            = "europe-west1"
+bigquery_location = "EU"
+environment       = "demo"
+github_repository = "fullstack-nick/rider-360"
+deploy_runtime    = false
+
+# Supply these outside Git when applicable:
+# admin_invoker      = "user:operator@example.com"
+# billing_account_id = "000000-000000-000000"
+# rider_image        = "europe-west1-docker.pkg.dev/.../rider-360@sha256:..."

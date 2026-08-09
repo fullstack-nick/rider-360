@@ -1,0 +1,13 @@
+rider_360:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID', 'tracegate-r7m5o9ld') }}"
+      dataset: r360
+      location: EU
+      threads: 4
+      job_execution_timeout_seconds: 600
+      job_retries: 1
+      priority: interactive
